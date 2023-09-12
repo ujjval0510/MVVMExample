@@ -1,20 +1,16 @@
 package com.example.mvvmexample.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.mvvmexample.data.db.AppDatabase
 import com.example.mvvmexample.data.db.entity.User
 import com.example.mvvmexample.data.network.MyAPI
 import com.example.mvvmexample.data.network.SafeAPIRequest
 import com.example.mvvmexample.data.network.responses.AuthResponse
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class UserRepository(
     private val api:MyAPI,
-    private val db:AppDatabase
+    private val db: AppDatabase
 ) : SafeAPIRequest() {
 
 /*    fun userLogin(email:String, password:String) : LiveData<String> {

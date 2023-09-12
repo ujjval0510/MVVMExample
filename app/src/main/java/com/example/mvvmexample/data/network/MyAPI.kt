@@ -1,6 +1,7 @@
 package com.example.mvvmexample.data.network
 
 import com.example.mvvmexample.data.network.responses.AuthResponse
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -25,10 +26,17 @@ interface MyAPI {
     ) : Response<AuthResponse>
 
     companion object{
+        operator fun invoke(
+            networkConnectionInterceptor: NetworkConnectionInterceptor
+        ) :MyAPI {
 
-        operator fun invoke() :MyAPI {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
+
             return Retrofit.Builder()
                 .baseUrl("https://api.localhost.in/mvvm/")
+                .client(okHttpClient) // added interceptor for checking connection
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyAPI::class.java)

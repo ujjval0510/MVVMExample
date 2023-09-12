@@ -7,5 +7,7 @@
 5. Coroutine for Async api calling
 6. Handling API Exceptions using Generic functions
 7. Redirect user to Home screen if it's already logged in using Observer. 
+8. Handling No Internet using interceptor in Retrofit.
+9. Custom Exception Handling.
  
  
