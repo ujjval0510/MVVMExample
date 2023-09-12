@@ -2,6 +2,8 @@ package com.example.mvvmexample.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.mvvmexample.data.db.AppDatabase
+import com.example.mvvmexample.data.db.entity.User
 import com.example.mvvmexample.data.network.MyAPI
 import com.example.mvvmexample.data.network.SafeAPIRequest
 import com.example.mvvmexample.data.network.responses.AuthResponse
@@ -10,7 +12,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserRepository : SafeAPIRequest() {
+class UserRepository(
+    private val api:MyAPI,
+    private val db:AppDatabase
+) : SafeAPIRequest() {
 
 /*    fun userLogin(email:String, password:String) : LiveData<String> {
         // we can not create a instant of LiveData because it's abstract class
@@ -42,6 +47,9 @@ class UserRepository : SafeAPIRequest() {
     }*/
      suspend fun userLogin(email:String, password:String) : AuthResponse {
         // using generic functions
-         return apiRequest { MyAPI().userLogin(email, password) }
+         return apiRequest { api.userLogin(email, password) }
      }
+
+    suspend fun saveUser(user: User) = db.getUserDao().insDate(user)
+    fun getUser() = db.getUserDao().getUser()
 }

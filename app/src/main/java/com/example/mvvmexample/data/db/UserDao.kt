@@ -10,7 +10,7 @@ import com.example.mvvmexample.data.db.entity.CURRENT_USER_ID
 @Dao
 interface UserDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insDate(user: User) : Long
+    suspend fun insDate(user: User) : Long
 
     @Query("SELECT * FROM user WHERE uId= $CURRENT_USER_ID")
     fun getUser() : LiveData<User>

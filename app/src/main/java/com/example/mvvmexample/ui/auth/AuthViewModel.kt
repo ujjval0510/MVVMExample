@@ -10,7 +10,9 @@ import com.example.mvvmexample.util.Corountines
  * AuthViewModel Class will interact with our
  * repository to perform the actual login operation.
  */
-class AuthViewModel : ViewModel(){
+class AuthViewModel(
+    private val repository: UserRepository // constructor injection
+) : ViewModel(){
 
     var email : String ? = null
     var password : String? = null
@@ -32,9 +34,10 @@ class AuthViewModel : ViewModel(){
         // Using coroutine
         Corountines.main {
             try {
-                val authResponse = UserRepository().userLogin(email!!, password!!) // calling suspending function inside coroutine
+                val authResponse = repository.userLogin(email!!, password!!) // calling suspending function inside coroutine
                 authResponse.user?.let {
                     authListener?.onSuccess(it)
+                    repository.saveUser(it) // save user in database
                     return@main
                 }
                 authListener?.onFailure(authResponse.message!!)
@@ -45,4 +48,6 @@ class AuthViewModel : ViewModel(){
         }
 
     }
+
+    fun getLoggedInUser() = repository.getUser()
 }

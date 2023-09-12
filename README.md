@@ -5,5 +5,7 @@
 3. Used Extension function.
 4. Setup Room Database
 5. Coroutine for Async api calling
+6. Handling API Exceptions using Generic functions
+7. Redirect user to Home screen if it's already logged in using Observer. 
  
  
