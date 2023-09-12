@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.mvvmexample.ui.auth.AuthViewModel" />
+    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
@@ -65,6 +70,7 @@
                 android:padding="18dp">
 
                 <EditText
+                    android:text="@={viewmodel.email}"
                     android:id="@+id/edit_text_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -76,6 +82,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:text="@={viewmodel.password}"
                     android:id="@+id/edit_text_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -101,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Sign In"
+                    android:onClick="@{viewmodel::onLoginButtonClick}"
                     android:textAllCaps="false" />
 
             </LinearLayout>
