@@ -3,7 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-//    id 'androidx.navigation.safeargs'
+    id 'kotlin-android'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -26,6 +27,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // enable databinding in project.
+    dataBinding {
+        enable = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -66,7 +73,7 @@ dependencies {
     // Android room
     implementation "androidx.room:room-ktx:2.1.0"
     implementation "androidx.room:room-runtime:2.1.0"
-//    kept "androidx.room:room-compiler:2.1.0"
+    annotationProcessor "androidx.room:room-compiler:2.1.0"
 
     // Android Navigation architecture
     implementation "androidx.navigation:navigation-ui-ktx:2.1.0"
