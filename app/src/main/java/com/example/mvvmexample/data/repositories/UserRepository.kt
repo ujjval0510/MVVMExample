@@ -3,13 +3,14 @@ package com.example.mvvmexample.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mvvmexample.data.network.MyAPI
+import com.example.mvvmexample.data.network.SafeAPIRequest
 import com.example.mvvmexample.data.network.responses.AuthResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserRepository {
+class UserRepository : SafeAPIRequest() {
 
 /*    fun userLogin(email:String, password:String) : LiveData<String> {
         // we can not create a instant of LiveData because it's abstract class
@@ -36,8 +37,11 @@ class UserRepository {
     }*/
 
 
-    suspend fun userLogin(email:String, password:String) : Response<AuthResponse> {
+ /*   suspend fun userLogin(email:String, password:String) : Response<AuthResponse> {
        return MyAPI().userLogin(email, password)
-    }
-
+    }*/
+     suspend fun userLogin(email:String, password:String) : AuthResponse {
+        // using generic functions
+         return apiRequest { MyAPI().userLogin(email, password) }
+     }
 }

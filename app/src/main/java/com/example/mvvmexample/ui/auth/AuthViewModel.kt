@@ -3,6 +3,7 @@ package com.example.mvvmexample.ui.auth
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mvvmexample.data.repositories.UserRepository
+import com.example.mvvmexample.util.APIException
 import com.example.mvvmexample.util.Corountines
 
 /**
@@ -30,12 +31,17 @@ class AuthViewModel : ViewModel(){
 
         // Using coroutine
         Corountines.main {
-            val response = UserRepository().userLogin(email!!, password!!) // calling suspending function inside coroutine
-            if(response.isSuccessful){
-                authListener?.onSuccess(response.body()?.user!!)
-            }else {
-                authListener?.onFailure("Response Code : ${response.code()}")
+            try {
+                val authResponse = UserRepository().userLogin(email!!, password!!) // calling suspending function inside coroutine
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!)
+            } catch (e:APIException) {
+                authListener?.onFailure(e.message!!)
             }
+
         }
 
     }

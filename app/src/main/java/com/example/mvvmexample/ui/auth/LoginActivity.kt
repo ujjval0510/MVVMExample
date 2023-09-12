@@ -12,8 +12,10 @@ import com.example.mvvmexample.data.db.entity.User
 import com.example.mvvmexample.databinding.ActivityLoginBinding
 import com.example.mvvmexample.util.hide
 import com.example.mvvmexample.util.show
+import com.example.mvvmexample.util.snackBar
 import com.example.mvvmexample.util.toast
 import kotlinx.android.synthetic.main.activity_login.progress_bar
+import kotlinx.android.synthetic.main.activity_login.root_layout
 
 //MVVM -> Activity can only communicate with ViewModel
 // ViewModel -> will interact with repository to send the email/password to our server.
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity() , AuthListener{
 
     override fun onSuccess(user: User) {
         progress_bar.hide()
-        toast("${user.name} is logged in")
+        root_layout.snackBar("${user.name} is logged in");
     }
 
     /*  override fun onSuccess(loginResponse: LiveData<String>) {
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity() , AuthListener{
 
     override fun onFailure(message: String) {
         progress_bar.hide()
-        toast(message)
+        root_layout.snackBar(message) // display snackbar 
     }
 }
 
