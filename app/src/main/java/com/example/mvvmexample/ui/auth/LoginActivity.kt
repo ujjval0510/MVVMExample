@@ -20,23 +20,30 @@ import com.example.mvvmexample.util.snackBar
 import com.example.mvvmexample.util.toast
 import kotlinx.android.synthetic.main.activity_login.progress_bar
 import kotlinx.android.synthetic.main.activity_login.root_layout
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein;
+import org.kodein.di.generic.instance
 
 //MVVM -> Activity can only communicate with ViewModel
 // ViewModel -> will interact with repository to send the email/password to our server.
 
-class LoginActivity : AppCompatActivity() , AuthListener {
+class LoginActivity : AppCompatActivity() , AuthListener, KodeinAware {
+
+    override val kodein by kodein()
+    private val factory: AuthViewModelFactory by instance() // will get the instance of AuthViewModelFactory class here using Kodein.
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_login)
 
+/*
         val networkConnectionInterceptor = NetworkConnectionInterceptor(this);
         val db = AppDatabase(this)
-
         val api = MyAPI(networkConnectionInterceptor);
-
         val repository = UserRepository(api, db as AppDatabase)
-
         val factory = AuthViewModelFactory(repository)
+*/
+
 
         // get binding
         val dataBinding : ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)

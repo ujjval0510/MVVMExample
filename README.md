@@ -10,10 +10,10 @@
 8. Handling No Internet using interceptor in Retrofit.
 9. Custom Exception Handling.
 10. Dependency Injection :
-    - It is a desing pattern and it is independent from android.
-    - basically means injecting the dependecies
+    - It is a design pattern and it is independent from android.
+    - basically means injecting the dependencies
     - It can be used anywhere while developing any project.
-    - DI desing pattenr says :
+    - DI design pattern says :
       -> Class should not create object inside it.
       -> But Object required should be supplied from outside.
 
@@ -31,7 +31,7 @@ that we will resolve this issue using dependencies injection.
     }
 ## ADVANTAGE :
     1. Loosely coupled.
-   2. Easy testing.
+    2. Easy testing.
 
 For achieve this we need some service that can project object on run time to solve this solution
 ## Kodein Framework (Kotlin dependencies Injection)
