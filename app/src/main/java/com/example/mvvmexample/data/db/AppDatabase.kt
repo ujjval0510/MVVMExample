@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase() {
         private var LOCK = Any()
 
         operator fun invoke(context: Context) = context ?: synchronized(LOCK) {
-            instance?:buildDatabase(context).also {
+            instance ?: buildDatabase(context).also {
                 instance = it
             }
         }

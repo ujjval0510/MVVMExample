@@ -1,5 +1,6 @@
 package com.example.mvvmexample.ui.auth
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.mvvmexample.data.repositories.UserRepository
@@ -17,6 +18,9 @@ class AuthViewModel(
 
     var email : String ? = null
     var password : String? = null
+    var confirmpassword : String? = null
+    var name : String ? = null
+
     var authListener:AuthListener? = null;
     fun onLoginButtonClick(view:View) {
         //started
@@ -53,4 +57,38 @@ class AuthViewModel(
     }
 
     fun getLoggedInUser() = repository.getUser()
+
+    fun onSignIn(view: View) {
+        Intent(view.context,LoginActivity::class.java).also {
+            view.context.startActivity(it)
+        }
+    }
+    fun onSignup(view:View) {
+        Intent(view.context,SignupActivity::class.java).also {
+            view.context.startActivity(it)
+        }
+    }
+    fun onSignupButtonClick(view:View) {
+        authListener?.onStarted()
+        if(name.isNullOrEmpty()) {
+            authListener?.onFailure("Name is required")
+            return
+        }
+        if(email.isNullOrEmpty()) {
+            authListener?.onFailure("Email is required")
+            return
+        }
+
+        if(password.isNullOrEmpty()) {
+            authListener?.onFailure("Please enter password")
+            return
+        }
+
+        if(password != confirmpassword) {
+            authListener?.onFailure("Password not match")
+            return
+        }
+
+
+    }
 }

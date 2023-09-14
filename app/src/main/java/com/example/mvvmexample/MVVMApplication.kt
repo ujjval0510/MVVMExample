@@ -22,9 +22,8 @@ class MVVMApplication : Application(), KodeinAware{
 
     override val kodein = Kodein.lazy {
         import(androidXModule(this@MVVMApplication))
-
+        //bind() from singleton {String()}
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
-        // MyAPI class need object of network class that we already bind above so it will take automatically that is the beauty of kodein
         bind() from singleton { MyAPI(instance()) }
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserRepository(instance(), instance()) }

@@ -38,9 +38,10 @@ class UserRepository(
     }*/
 
 
- /*   suspend fun userLogin(email:String, password:String) : Response<AuthResponse> {
+    /* suspend fun userLogin(email:String, password:String) : Response<AuthResponse> {
        return MyAPI().userLogin(email, password)
     }*/
+
      suspend fun userLogin(email:String, password:String) : AuthResponse {
         // using generic functions
          return apiRequest { api.userLogin(email, password) }
@@ -48,4 +49,8 @@ class UserRepository(
 
     suspend fun saveUser(user: User) = db.getUserDao().insDate(user)
     fun getUser() = db.getUserDao().getUser()
+    suspend fun userSignup(email: String, password: String, confirmPassword:String) : AuthResponse{
+        return apiRequest { api.userSignup(email, password, confirmPassword) }
+    }
+
 }

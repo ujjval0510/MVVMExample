@@ -43,8 +43,6 @@ class LoginActivity : AppCompatActivity() , AuthListener, KodeinAware {
         val repository = UserRepository(api, db as AppDatabase)
         val factory = AuthViewModelFactory(repository)
 */
-
-
         // get binding
         val dataBinding : ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
 
